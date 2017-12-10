@@ -13,7 +13,7 @@
 #define TIME_TO_EXPLODE 4
 #define EXPLOSION_DURATION 1
 
-
+#define POINTS_BLOCK_DESTRUCTION 15
 
 
 const std::string MENU_BG = "MENU_BG";

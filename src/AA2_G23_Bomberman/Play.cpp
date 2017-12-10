@@ -109,7 +109,7 @@ void Play::Update() {
 									hitWallDown = true;
 								}
 							}
-							else if (!hitWallUp) {
+							if (!hitWallUp) {
 								if (gameMap[i - expRadius][j]->Type != GameObjects::WALL) {
 									lastType = gameMap[i - expRadius][j]->Type;
 									gameMap[i - expRadius][j] = new Cell(j, i - expRadius, GameObjects::EXPLOSION, true, false, 1, lastType);
@@ -133,15 +133,17 @@ void Play::Update() {
 									hitWallRight = true;
 								}
 							}
-							else if (!hitWallLeft) {
-								if (gameMap[i][j - expRadius]->Type != GameObjects::WALL) {
+							
+							if (!hitWallLeft) {
+								if ( gameMap[i][j - expRadius]->Type != GameObjects::WALL) {
 									lastType = gameMap[i][j - expRadius]->Type;
-									gameMap[i][j - expRadius] = new Cell(j + expRadius, i, GameObjects::EXPLOSION, true, false, 1, lastType);
+									gameMap[i][j - expRadius] = new Cell(j - expRadius, i, GameObjects::EXPLOSION, true, false, 1, lastType);
 								}
 								else {
 									hitWallLeft = true;
 								}
 							}
+							
 							expRadius++;
 						}
 					}
@@ -157,8 +159,7 @@ void Play::Update() {
 					//Comprobar colisiones
 					//Sumar Puntos
 					//Limpiar sprites de las explosiones
-					gameMap[i][j] = new Cell(j, i, GameObjects::EMPTY, true, false, 2, GameObjects::EXPLOSION);
-					
+					gameMap[i][j] = new Cell(j, i, GameObjects::EMPTY, true, false, 1, GameObjects::EXPLOSION);
 				}
 			}
 		}
