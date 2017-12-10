@@ -37,14 +37,10 @@ Play::Play(int map) :
 	gameDuration = std::stoi(pRoot->first_attribute("gameDuration")->value());
 
 	//Creación del Mapa
-	
-	/*gameMap.resize(numRows);
-	for (int i = 0; i < numRows; ++i)
-		gameMap[i].resize(numColumns);*/
-
-	int i = 0;
 	gameMap = std::vector<std::vector<Cell*>>(numRows, std::vector<Cell*>(numColumns));
+	int i = 0;
 	
+	//Rellena el Mapa con el contenido del xml
 	for (rapidxml::xml_node<> *pNode = pRoot->first_node("Row0"); pNode; pNode = pNode->next_sibling()) {
 		int j = 0;
 		for (rapidxml::xml_node<> *pNodeI = pNode->first_node(); pNodeI; pNodeI = pNodeI->next_sibling()) {
@@ -62,6 +58,7 @@ Play::Play(int map) :
 		i++;
 	}
 
+	//Carga texturas
 	Renderer::Instance()->LoadTexture("background", PATH_MENUBG);
 	Renderer::Instance()->LoadTexture("items", PATH_ITEMS);
 	Renderer::Instance()->LoadTexture("explosion", PATH_EXPLOSION);
@@ -101,6 +98,7 @@ void Play::Update() {
 						int expRadius = 0;
 						while (expRadius < 3) {
 							if (!hitWallDown) {
+								//Alcance de la explosion por abajo - Player1
 								if (gameMap[i + expRadius][j]->Type != GameObjects::WALL) {
 									lastType = gameMap[i + expRadius][j]->Type;
 									gameMap[i + expRadius][j] = new Cell(j, i + expRadius, GameObjects::EXPLOSION, true, false, 1, lastType);
@@ -110,6 +108,7 @@ void Play::Update() {
 								}
 							}
 							if (!hitWallUp) {
+								//Alcance de la explosion por arriba - Player1
 								if (gameMap[i - expRadius][j]->Type != GameObjects::WALL) {
 									lastType = gameMap[i - expRadius][j]->Type;
 									gameMap[i - expRadius][j] = new Cell(j, i - expRadius, GameObjects::EXPLOSION, true, false, 1, lastType);
@@ -125,6 +124,7 @@ void Play::Update() {
 						expRadius = 0;
 						while (expRadius < 3) {
 							if(!hitWallRight){
+								//Alcance de la explosion por la derecha - Player1
 								if (gameMap[i][j + expRadius]->Type != GameObjects::WALL) {
 									lastType = gameMap[i][j + expRadius]->Type;
 									gameMap[i][j + expRadius] = new Cell(j + expRadius, i, GameObjects::EXPLOSION, true, false, 1, lastType);
@@ -135,6 +135,7 @@ void Play::Update() {
 							}
 							
 							if (!hitWallLeft) {
+								//Alcance de la explosion por la izquierda - Player1
 								if ( gameMap[i][j - expRadius]->Type != GameObjects::WALL) {
 									lastType = gameMap[i][j - expRadius]->Type;
 									gameMap[i][j - expRadius] = new Cell(j - expRadius, i, GameObjects::EXPLOSION, true, false, 1, lastType);
@@ -156,6 +157,7 @@ void Play::Update() {
 						int expRadius = 0;
 						while (expRadius < 3) {
 							if (!hitWallDown) {
+								//Alcance de la explosion por abajo - Player2
 								if (gameMap[i + expRadius][j]->Type != GameObjects::WALL) {
 									lastType = gameMap[i + expRadius][j]->Type;
 									gameMap[i + expRadius][j] = new Cell(j, i + expRadius, GameObjects::EXPLOSION, true, false, 2, lastType);
@@ -165,6 +167,7 @@ void Play::Update() {
 								}
 							}
 							if (!hitWallUp) {
+								//Alcance de la explosion por arriba - Player2
 								if (gameMap[i - expRadius][j]->Type != GameObjects::WALL) {
 									lastType = gameMap[i - expRadius][j]->Type;
 									gameMap[i - expRadius][j] = new Cell(j, i - expRadius, GameObjects::EXPLOSION, true, false, 2, lastType);
@@ -180,6 +183,7 @@ void Play::Update() {
 						expRadius = 0;
 						while (expRadius < 3) {
 							if (!hitWallRight) {
+								//Alcance de la explosion por la derecha - Player2
 								if (gameMap[i][j + expRadius]->Type != GameObjects::WALL) {
 									lastType = gameMap[i][j + expRadius]->Type;
 									gameMap[i][j + expRadius] = new Cell(j + expRadius, i, GameObjects::EXPLOSION, true, false, 2, lastType);
@@ -190,6 +194,7 @@ void Play::Update() {
 							}
 
 							if (!hitWallLeft) {
+								//Alcance de la explosion por la izquierda - Player2
 								if (gameMap[i][j - expRadius]->Type != GameObjects::WALL) {
 									lastType = gameMap[i][j - expRadius]->Type;
 									gameMap[i][j - expRadius] = new Cell(j - expRadius, i, GameObjects::EXPLOSION, true, false, 2, lastType);
@@ -213,13 +218,13 @@ void Play::Update() {
 						if (gameMap[i][j]->lastCellType == GameObjects::BLOCK) {
 							player1.setScore(POINTS_BLOCK_DESTRUCTION);
 						}
-						gameMap[i][j] = new Cell(j, i, GameObjects::EMPTY, true, false, 1, GameObjects::EXPLOSION);
+						gameMap[i][j] = new Cell(j, i, gameMap[i][j]->SpawnPowerup(), true, false, 1, GameObjects::EXPLOSION);
 					}
 					else if (gameMap[i][j]->getOwnerID() == 2) {
 						if (gameMap[i][j]->lastCellType == GameObjects::BLOCK) {
 							player2.setScore(POINTS_BLOCK_DESTRUCTION);
 						}
-						gameMap[i][j] = new Cell(j, i, GameObjects::EMPTY, true, false, 2, GameObjects::EXPLOSION);
+						gameMap[i][j] = new Cell(j, i, gameMap[i][j]->SpawnPowerup(), true, false, 2, GameObjects::EXPLOSION);
 					}
 				}
 			}
@@ -236,6 +241,7 @@ void Play::EventHandle() {
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_KEYDOWN:
+			//Movimiento Player 2
 			if (event.key.keysym.sym == SDLK_UP) {
 				player2.setSpriteX(0);
 				player2.setSpriteY(0);
@@ -256,6 +262,7 @@ void Play::EventHandle() {
 				player2.setSpriteY(3);
 				if (gameMap[player2.getY()][player2.getX() + 1]->isWalkable) player2.setX(player2.getX() + 1);
 			}
+			//Movimiento Player 1
 			if (event.key.keysym.sym == SDLK_w) {
 				player1.setSpriteX(0);
 				player1.setSpriteY(0);
@@ -276,6 +283,7 @@ void Play::EventHandle() {
 				player1.setSpriteY(3);
 				if (gameMap[player1.getY()][player1.getX() + 1]->isWalkable) player1.setX(player1.getX() + 1);
 			}
+			//Input lanzamiento bombas
 			if (event.key.keysym.sym == SDLK_SPACE) {
 				if (player1.getCanDropBomb()) {
 					gameMap[player1.getY()][player1.getX()] = new Cell(player1.getX(), player1.getY(), GameObjects::BOMB, true, false, 1, GameObjects::EMPTY);

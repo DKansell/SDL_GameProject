@@ -1,6 +1,8 @@
 #pragma once
 #include "Renderer.h"
 #include <ctime>
+#include <stdio.h>      
+#include <stdlib.h> 
 
 enum class GameObjects { WALL, BLOCK, EMPTY, BOMB, EXPLOSION, PW_CASCO, PW_PATINES};
 class Cell
@@ -8,11 +10,13 @@ class Cell
 public:
 	Cell(int x, int y, GameObjects T, bool walkable, bool breakable, int ownerID, GameObjects L);
 	~Cell();
+
 	void Draw();
 	bool BombManager();
 	bool ExplosionManager();
 	void setOwnerID(int id);
 	int getOwnerID();
+	GameObjects SpawnPowerup();
 
 	GameObjects Type;
 	GameObjects lastCellType;

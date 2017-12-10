@@ -5,7 +5,6 @@
 Cell::Cell(int x, int y, GameObjects T, bool walkable, bool breakable, int ownerID, GameObjects L) :
 	Type(T),
 	lastCellType(L),
-	//cellRect ({ x, y, SPRITE_SIZE , SPRITE_SIZE}),
 	xPos(x),
 	yPos(y),
 	isWalkable(walkable),
@@ -31,16 +30,15 @@ Cell::Cell(int x, int y, GameObjects T, bool walkable, bool breakable, int owner
 		explosionTime = clock();
 		break;
 	case GameObjects::PW_CASCO:
-		spriteRect = { 3* SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE };
+		spriteRect = { 2 * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE };
 		break;
 	case GameObjects::PW_PATINES:
-		spriteRect = { 2 * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE };
+		spriteRect = { SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE };
 		break;
 	default:
 		break;
 	}
 }
-
 
 Cell::~Cell()
 {
@@ -84,4 +82,12 @@ void Cell::setOwnerID(int id) {
 
 int Cell::getOwnerID() {
 	return ownerID;
+}
+
+GameObjects Cell::SpawnPowerup() {
+	srand(time(NULL));
+	int aux = rand() % 10;
+	if (aux == 1) return GameObjects::PW_CASCO;
+	else if (aux == 2) return GameObjects::PW_PATINES;
+	else return GameObjects::EMPTY;
 }
