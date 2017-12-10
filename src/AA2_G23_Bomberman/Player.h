@@ -14,6 +14,7 @@ private:
 	float speed;
 	bool isInvincible;
 	bool speedBoost;
+	bool hasPowerUp;
 	bool canDropBomb;
 	int pNum;
 	SDL_Rect spriteRect;
@@ -37,9 +38,12 @@ public:
 	void setSpriteY(int y);
 	bool getCanDropBomb();
 	void setCanDropBomb(bool b);
+	void setCasco(bool b);
+	bool getCasco();
+	void setPatines(bool b);
+	bool getPatines();
+
 
 	void Draw();
-	void Update();
-
 };
 

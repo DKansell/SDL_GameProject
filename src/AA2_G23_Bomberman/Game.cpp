@@ -41,7 +41,7 @@ void Game::GameLoop()
 			currentScene = scenes::Ranking;*/
 			break;
 		case states::Exit:
-			/*GameScene->~Scene();
+			/*delete GameScene;
 			GameScene = new Menu();
 			currentScene = scenes::Menu;*/
 			delete GameScene;

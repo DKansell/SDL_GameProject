@@ -2,6 +2,7 @@
 
 
 
+
 Cell::Cell(int x, int y, GameObjects T, bool walkable, bool breakable, int ownerID, GameObjects L) :
 	Type(T),
 	lastCellType(L),
@@ -85,7 +86,6 @@ int Cell::getOwnerID() {
 }
 
 GameObjects Cell::SpawnPowerup() {
-	srand(time(NULL));
 	int aux = rand() % 10;
 	if (aux == 1) return GameObjects::PW_CASCO;
 	else if (aux == 2) return GameObjects::PW_PATINES;

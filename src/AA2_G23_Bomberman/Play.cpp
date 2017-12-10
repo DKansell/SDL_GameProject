@@ -14,6 +14,7 @@ Play::Play(int map) :
 	Scene::Scene(),
 	player1(1, 1, 1),
 	player2(13, 11, 2),
+	hud(player1, player2),
 	bgRect({0,0,SCREEN_WIDTH, SCREEN_HEIGHT})
 {
 	if (map == 1) configPath = "../../res/files/config1.xml";
@@ -79,6 +80,7 @@ void Play::Draw() {
 	}
 		player1.Draw();
 		player2.Draw();
+		hud.Draw();
 		Renderer::Instance()->Render();
 }
 
@@ -144,7 +146,6 @@ void Play::Update() {
 									hitWallLeft = true;
 								}
 							}
-							
 							expRadius++;
 						}
 					}
@@ -211,27 +212,26 @@ void Play::Update() {
 			}
 			if (gameMap[i][j]->Type == GameObjects::EXPLOSION) {
 				if (gameMap[i][j]->ExplosionManager()) {
-					//Comprobar colisiones
 					//Sumar Puntos
-					//Limpiar sprites de las explosiones
 					if (gameMap[i][j]->getOwnerID() == 1) {
 						if (gameMap[i][j]->lastCellType == GameObjects::BLOCK) {
 							player1.setScore(POINTS_BLOCK_DESTRUCTION);
+							std::cout << "Player 1 -> Score: " << player1.getScore() << std::endl;
 						}
 						gameMap[i][j] = new Cell(j, i, gameMap[i][j]->SpawnPowerup(), true, false, 1, GameObjects::EXPLOSION);
 					}
 					else if (gameMap[i][j]->getOwnerID() == 2) {
 						if (gameMap[i][j]->lastCellType == GameObjects::BLOCK) {
 							player2.setScore(POINTS_BLOCK_DESTRUCTION);
+							std::cout << "Player 2 -> Score: " << player2.getScore() << std::endl;
 						}
+						//Limpiar sprites de las explosiones - Spawnear PowerUp?
 						gameMap[i][j] = new Cell(j, i, gameMap[i][j]->SpawnPowerup(), true, false, 2, GameObjects::EXPLOSION);
 					}
 				}
 			}
 		}
 	}
-	player1.Update();
-	player2.Update();
 }
 
 void Play::EventHandle() {
@@ -246,42 +246,106 @@ void Play::EventHandle() {
 				player2.setSpriteX(0);
 				player2.setSpriteY(0);
 				if (gameMap[player2.getY() - 1][player2.getX()]->isWalkable) player2.setY(player2.getY() - 1);
+				if (gameMap[player2.getY()][player2.getX()]->Type == GameObjects::PW_CASCO) {
+					player2.setCasco(true);
+					gameMap[player2.getY()][player2.getX()]->Type = GameObjects::EMPTY;
+				}
+				if (gameMap[player2.getY()][player2.getX()]->Type == GameObjects::PW_PATINES) {
+					player2.setPatines(true);
+					gameMap[player2.getY()][player2.getX()]->Type = GameObjects::EMPTY;
+				}
 			}
 			if (event.key.keysym.sym == SDLK_DOWN) {
 				player2.setSpriteX(0);
 				player2.setSpriteY(2);
 				if (gameMap[player2.getY() + 1][player2.getX()]->isWalkable) player2.setY(player2.getY() + 1);
+				if (gameMap[player2.getY()][player2.getX()]->Type == GameObjects::PW_CASCO) {
+					player2.setCasco(true);
+					gameMap[player2.getY()][player2.getX()]->Type = GameObjects::EMPTY;
+				}
+				if (gameMap[player2.getY()][player2.getX()]->Type == GameObjects::PW_PATINES) {
+					player2.setPatines(true);
+					gameMap[player2.getY()][player2.getX()]->Type = GameObjects::EMPTY;
+				}
 			}
 			if (event.key.keysym.sym == SDLK_LEFT) {
 				player2.setSpriteX(0);
 				player2.setSpriteY(1);
 				if (gameMap[player2.getY()][player2.getX()-1]->isWalkable) player2.setX(player2.getX() - 1);
+				if (gameMap[player2.getY()][player2.getX()]->Type == GameObjects::PW_CASCO) {
+					player2.setCasco(true);
+					gameMap[player2.getY()][player2.getX()]->Type = GameObjects::EMPTY;
+				}
+				if (gameMap[player2.getY()][player2.getX()]->Type == GameObjects::PW_PATINES) {
+					player2.setPatines(true);
+					gameMap[player2.getY()][player2.getX()]->Type = GameObjects::EMPTY;
+				}
 			}
 			if (event.key.keysym.sym == SDLK_RIGHT) {
 				player2.setSpriteX(0);
 				player2.setSpriteY(3);
 				if (gameMap[player2.getY()][player2.getX() + 1]->isWalkable) player2.setX(player2.getX() + 1);
+				if (gameMap[player2.getY()][player2.getX()]->Type == GameObjects::PW_CASCO) {
+					player2.setCasco(true);
+					gameMap[player2.getY()][player2.getX()]->Type = GameObjects::EMPTY;
+				}
+				if (gameMap[player2.getY()][player2.getX()]->Type == GameObjects::PW_PATINES) {
+					player2.setPatines(true);
+					gameMap[player2.getY()][player2.getX()]->Type = GameObjects::EMPTY;
+				}
 			}
 			//Movimiento Player 1
 			if (event.key.keysym.sym == SDLK_w) {
 				player1.setSpriteX(0);
 				player1.setSpriteY(0);
 				if (gameMap[player1.getY() - 1][player1.getX()]->isWalkable) player1.setY(player1.getY() - 1);
+				if (gameMap[player1.getY()][player1.getX()]->Type == GameObjects::PW_CASCO) {
+					player1.setCasco(true);
+					gameMap[player1.getY()][player1.getX()]->Type = GameObjects::EMPTY;
+				}
+				if (gameMap[player1.getY()][player1.getX()]->Type == GameObjects::PW_PATINES) {
+					player1.setPatines(true);
+					gameMap[player1.getY()][player1.getX()]->Type = GameObjects::EMPTY;
+				}
 			}
 			if (event.key.keysym.sym == SDLK_s) {
 				player1.setSpriteX(0);
 				player1.setSpriteY(2);
 				if (gameMap[player1.getY() + 1][player1.getX()]->isWalkable) player1.setY(player1.getY() + 1);
+				if (gameMap[player1.getY()][player1.getX()]->Type == GameObjects::PW_CASCO) {
+					player1.setCasco(true);
+					gameMap[player1.getY()][player1.getX()]->Type = GameObjects::EMPTY;
+				}
+				if (gameMap[player1.getY()][player1.getX()]->Type == GameObjects::PW_PATINES) {
+					player1.setPatines(true);
+					gameMap[player1.getY()][player1.getX()]->Type = GameObjects::EMPTY;
+				}
 			}
 			if (event.key.keysym.sym == SDLK_a) {
 				player1.setSpriteX(0);
 				player1.setSpriteY(1);
 				if (gameMap[player1.getY()][player1.getX() - 1]->isWalkable) player1.setX(player1.getX() - 1);
+				if (gameMap[player1.getY()][player1.getX()]->Type == GameObjects::PW_CASCO) {
+					player1.setCasco(true);
+					gameMap[player1.getY()][player1.getX()]->Type = GameObjects::EMPTY;
+				}
+				if (gameMap[player1.getY()][player1.getX()]->Type == GameObjects::PW_PATINES) {
+					player1.setPatines(true);
+					gameMap[player1.getY()][player1.getX()]->Type = GameObjects::EMPTY;
+				}
 			}
 			if (event.key.keysym.sym == SDLK_d) {
 				player1.setSpriteX(0);
 				player1.setSpriteY(3);
 				if (gameMap[player1.getY()][player1.getX() + 1]->isWalkable) player1.setX(player1.getX() + 1);
+				if (gameMap[player1.getY()][player1.getX()]->Type == GameObjects::PW_CASCO) {
+					player1.setCasco(true);
+					gameMap[player1.getY()][player1.getX()]->Type = GameObjects::EMPTY;
+				}
+				if (gameMap[player1.getY()][player1.getX()]->Type == GameObjects::PW_PATINES) {
+					player1.setPatines(true);
+					gameMap[player1.getY()][player1.getX()]->Type = GameObjects::EMPTY;
+				}
 			}
 			//Input lanzamiento bombas
 			if (event.key.keysym.sym == SDLK_SPACE) {

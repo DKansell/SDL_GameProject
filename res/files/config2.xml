@@ -23,14 +23,14 @@
       <Pos2>2</Pos2>
       <Pos3>1</Pos3>
       <Pos4>1</Pos4>
-      <Pos5>1</Pos5>
+      <Pos5>0</Pos5>
       <Pos6>1</Pos6>
       <Pos7>1</Pos7>
-      <Pos8>1</Pos8>
+      <Pos8>0</Pos8>
       <Pos9>1</Pos9>
       <Pos10>1</Pos10>
       <Pos11>1</Pos11>
-      <Pos12>1</Pos12>
+      <Pos12>0</Pos12>
       <Pos13>1</Pos13>
       <Pos14>0</Pos14>
     </Row1>
@@ -39,11 +39,11 @@
       <Pos1>2</Pos1>
       <Pos2>0</Pos2>
       <Pos3>1</Pos3>
-      <Pos4>0</Pos4>
+      <Pos4>1</Pos4>
       <Pos5>1</Pos5>
       <Pos6>0</Pos6>
       <Pos7>1</Pos7>
-      <Pos8>0</Pos8>
+      <Pos8>1</Pos8>
       <Pos9>1</Pos9>
       <Pos10>0</Pos10>
       <Pos11>1</Pos11>
@@ -56,15 +56,15 @@
       <Pos1>1</Pos1>
       <Pos2>1</Pos2>
       <Pos3>1</Pos3>
-      <Pos4>1</Pos4>
+      <Pos4>0</Pos4>
       <Pos5>1</Pos5>
       <Pos6>1</Pos6>
-      <Pos7>1</Pos7>
+      <Pos7>0</Pos7>
       <Pos8>1</Pos8>
       <Pos9>1</Pos9>
-      <Pos10>1</Pos10>
+      <Pos10>0</Pos10>
       <Pos11>1</Pos11>
-      <Pos12>1</Pos12>
+      <Pos12>0</Pos12>
       <Pos13>1</Pos13>
       <Pos14>0</Pos14>
     </Row3>
@@ -96,7 +96,7 @@
       <Pos7>1</Pos7>
       <Pos8>1</Pos8>
       <Pos9>1</Pos9>
-      <Pos10>1</Pos10>
+      <Pos10>0</Pos10>
       <Pos11>1</Pos11>
       <Pos12>1</Pos12>
       <Pos13>1</Pos13>
@@ -110,7 +110,7 @@
       <Pos4>0</Pos4>
       <Pos5>1</Pos5>
       <Pos6>0</Pos6>
-      <Pos7>1</Pos7>
+      <Pos7>0</Pos7>
       <Pos8>0</Pos8>
       <Pos9>1</Pos9>
       <Pos10>0</Pos10>
@@ -124,15 +124,15 @@
       <Pos1>1</Pos1>
       <Pos2>1</Pos2>
       <Pos3>1</Pos3>
-      <Pos4>1</Pos4>
+      <Pos4>0</Pos4>
       <Pos5>1</Pos5>
       <Pos6>1</Pos6>
       <Pos7>1</Pos7>
-      <Pos8>1</Pos8>
+      <Pos8>0</Pos8>
       <Pos9>1</Pos9>
       <Pos10>1</Pos10>
       <Pos11>1</Pos11>
-      <Pos12>1</Pos12>
+      <Pos12>0</Pos12>
       <Pos13>1</Pos13>
       <Pos14>0</Pos14>
     </Row7>
@@ -142,13 +142,13 @@
       <Pos2>0</Pos2>
       <Pos3>1</Pos3>
       <Pos4>0</Pos4>
-      <Pos5>1</Pos5>
+      <Pos5>0</Pos5>
       <Pos6>0</Pos6>
       <Pos7>1</Pos7>
       <Pos8>0</Pos8>
       <Pos9>1</Pos9>
       <Pos10>0</Pos10>
-      <Pos11>1</Pos11>
+      <Pos11>0</Pos11>
       <Pos12>0</Pos12>
       <Pos13>1</Pos13>
       <Pos14>0</Pos14>
@@ -177,11 +177,11 @@
       <Pos3>1</Pos3>
       <Pos4>0</Pos4>
       <Pos5>1</Pos5>
-      <Pos6>0</Pos6>
+      <Pos6>1</Pos6>
       <Pos7>1</Pos7>
       <Pos8>0</Pos8>
       <Pos9>1</Pos9>
-      <Pos10>0</Pos10>
+      <Pos10>1</Pos10>
       <Pos11>1</Pos11>
       <Pos12>0</Pos12>
       <Pos13>2</Pos13>
@@ -191,9 +191,9 @@
       <Pos0>0</Pos0>
       <Pos1>1</Pos1>
       <Pos2>1</Pos2>
-      <Pos3>1</Pos3>
+      <Pos3>0</Pos3>
       <Pos4>1</Pos4>
-      <Pos5>1</Pos5>
+      <Pos5>0</Pos5>
       <Pos6>1</Pos6>
       <Pos7>1</Pos7>
       <Pos8>1</Pos8>

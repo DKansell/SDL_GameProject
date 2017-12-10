@@ -63,9 +63,6 @@ void Player::Draw() {
 	}
 }
 
-void Player::Update() {
-
-}
 
 int Player::getX() {
 	return playerX;
@@ -97,4 +94,20 @@ bool Player::getCanDropBomb() {
 
 void Player::setCanDropBomb(bool b) {
 	canDropBomb = b;
+}
+
+void Player::setCasco(bool b) {
+	isInvincible = b;
+}
+
+bool Player::getCasco() {
+	return isInvincible;
+}
+
+void Player::setPatines(bool b) {
+	speedBoost = b;
+}
+
+bool Player::getPatines() {
+	return speedBoost;
 }
