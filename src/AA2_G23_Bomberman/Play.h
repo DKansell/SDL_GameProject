@@ -26,4 +26,5 @@ private:
 	int playTime;
 	int numRows;
 	int numColumns;
+	int gameDuration;
 };

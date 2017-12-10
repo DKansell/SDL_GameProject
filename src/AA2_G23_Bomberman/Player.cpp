@@ -9,6 +9,7 @@ Player::Player(int playerX, int playerY, int pNum) :
 	pNum(pNum),
 	isInvincible(false),
 	speedBoost(false),
+	canDropBomb(true),
 	//spriteRect({ SPRITE_SIZE * 2, SPRITE_SIZE * 3, SPRITE_SIZE, SPRITE_SIZE }),
 	//playerRect({ SPRITE_SIZE * playerX, HUD_HEIGHT + SPRITE_SIZE * playerY, SPRITE_SIZE, SPRITE_SIZE })
 	playerX(playerX),
@@ -91,3 +92,10 @@ void Player::setSpriteY(int y) {
 	spriteY = y;
 }
 
+bool Player::getCanDropBomb() {
+	return canDropBomb;
+}
+
+void Player::setCanDropBomb(bool b) {
+	canDropBomb = b;
+}

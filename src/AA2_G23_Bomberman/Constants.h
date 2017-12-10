@@ -9,6 +9,13 @@
 #define SPRITE_SIZE 48
 #define HUD_HEIGHT 80
 
+#define POWERUP_TIME 10
+#define TIME_TO_EXPLODE 4
+#define EXPLOSION_DURATION 1
+
+
+
+
 const std::string MENU_BG = "MENU_BG";
 const std::string PLAY_BG = "PLAY_BG";
 const std::string PLAY_GOLD = "PLAY_GOLD";

@@ -14,6 +14,7 @@ private:
 	float speed;
 	bool isInvincible;
 	bool speedBoost;
+	bool canDropBomb;
 	int pNum;
 	SDL_Rect spriteRect;
 	SDL_Rect playerRect;
@@ -34,6 +35,8 @@ public:
 	void setY(int y);
 	void setSpriteX(int x);
 	void setSpriteY(int y);
+	bool getCanDropBomb();
+	void setCanDropBomb(bool b);
 
 	void Draw();
 	void Update();
