@@ -148,6 +148,7 @@ void Play::EventHandle() {
 				gameMap[player2.getY()][player2.getX()] = new Cell(player2.getX(), player2.getY(), GameObjects::BOMB, false, false);
 			}
 			break;
+
 		default:;
 		}
 	}
