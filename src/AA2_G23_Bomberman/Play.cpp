@@ -149,8 +149,58 @@ void Play::Update() {
 					}
 					else if (gameMap[i][j]->getOwnerID() == 2) {
 						player2.setCanDropBomb(true);
-						gameMap[i][j] = new Cell(j, i, GameObjects::EXPLOSION, true, false, 2, GameObjects::BOMB);
+						GameObjects lastType;
 						//RADIO EXPLOSION
+						bool hitWallUp = false;
+						bool hitWallDown = false;
+						int expRadius = 0;
+						while (expRadius < 3) {
+							if (!hitWallDown) {
+								if (gameMap[i + expRadius][j]->Type != GameObjects::WALL) {
+									lastType = gameMap[i + expRadius][j]->Type;
+									gameMap[i + expRadius][j] = new Cell(j, i + expRadius, GameObjects::EXPLOSION, true, false, 2, lastType);
+								}
+								else {
+									hitWallDown = true;
+								}
+							}
+							if (!hitWallUp) {
+								if (gameMap[i - expRadius][j]->Type != GameObjects::WALL) {
+									lastType = gameMap[i - expRadius][j]->Type;
+									gameMap[i - expRadius][j] = new Cell(j, i - expRadius, GameObjects::EXPLOSION, true, false, 2, lastType);
+								}
+								else {
+									hitWallUp = true;
+								}
+							}
+							expRadius++;
+						}
+						bool hitWallRight = false;
+						bool hitWallLeft = false;
+						expRadius = 0;
+						while (expRadius < 3) {
+							if (!hitWallRight) {
+								if (gameMap[i][j + expRadius]->Type != GameObjects::WALL) {
+									lastType = gameMap[i][j + expRadius]->Type;
+									gameMap[i][j + expRadius] = new Cell(j + expRadius, i, GameObjects::EXPLOSION, true, false, 2, lastType);
+								}
+								else {
+									hitWallRight = true;
+								}
+							}
+
+							if (!hitWallLeft) {
+								if (gameMap[i][j - expRadius]->Type != GameObjects::WALL) {
+									lastType = gameMap[i][j - expRadius]->Type;
+									gameMap[i][j - expRadius] = new Cell(j - expRadius, i, GameObjects::EXPLOSION, true, false, 2, lastType);
+								}
+								else {
+									hitWallLeft = true;
+								}
+							}
+
+							expRadius++;
+						}
 					}
 				}
 			}
@@ -159,7 +209,18 @@ void Play::Update() {
 					//Comprobar colisiones
 					//Sumar Puntos
 					//Limpiar sprites de las explosiones
-					gameMap[i][j] = new Cell(j, i, GameObjects::EMPTY, true, false, 1, GameObjects::EXPLOSION);
+					if (gameMap[i][j]->getOwnerID() == 1) {
+						if (gameMap[i][j]->lastCellType == GameObjects::BLOCK) {
+							player1.setScore(POINTS_BLOCK_DESTRUCTION);
+						}
+						gameMap[i][j] = new Cell(j, i, GameObjects::EMPTY, true, false, 1, GameObjects::EXPLOSION);
+					}
+					else if (gameMap[i][j]->getOwnerID() == 2) {
+						if (gameMap[i][j]->lastCellType == GameObjects::BLOCK) {
+							player2.setScore(POINTS_BLOCK_DESTRUCTION);
+						}
+						gameMap[i][j] = new Cell(j, i, GameObjects::EMPTY, true, false, 2, GameObjects::EXPLOSION);
+					}
 				}
 			}
 		}
